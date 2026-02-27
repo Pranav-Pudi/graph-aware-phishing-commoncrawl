@@ -1,0 +1,23 @@
+#!/bin/bash
+#PBS -q parallel
+#PBS -N bert_para_81k
+#PBS -l select=1:ncpus=24:mem=64gb
+#PBS -l walltime=04:00:00
+#PBS -j oe
+#PBS -o /home/svu/e1430653/job_logs/bert_para.out
+
+# Setup Env
+export PATH="$HOME/miniconda3/bin:$PATH"
+source activate myenv
+
+# Prevent deadlock between HuggingFace tokenizers and multiprocessing
+export TOKENIZERS_PARALLELISM=false
+
+cd /hpctmp/e1430653/project || exit 1
+mkdir -p outputs
+
+python src/analysis/bertopic_run.py \
+    --input "/hpctmp/e1430653/processed_features.parquet" \
+    --output "outputs/semantic_results.parquet" \
+    --model-dir "outputs/bertopic_model"
+

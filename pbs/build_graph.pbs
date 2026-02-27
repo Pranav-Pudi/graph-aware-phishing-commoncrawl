@@ -1,0 +1,36 @@
+#!/bin/bash
+#PBS -q parallel
+#PBS -N build_graph_final
+#PBS -l select=1:ncpus=12:mem=64gb
+#PBS -l walltime=08:00:00
+#PBS -j oe
+#PBS -o /home/svu/e1430653/job_logs/graph_build.out
+
+# ────────────────────────────────────────────────
+# Environment Setup
+# ────────────────────────────────────────────────
+export PATH="$HOME/miniconda3/bin:$PATH"
+source activate myenv
+
+# ────────────────────────────────────────────────
+# Project Paths
+# ────────────────────────────────────────────────
+PROJ_DIR="/hpctmp/e1430653/project"
+INPUT_FILE="$PROJ_DIR/outputs/final_gnn_features.parquet"
+OUTPUT_FILE="$PROJ_DIR/outputs/graph_edges.parquet"
+
+cd $PROJ_DIR || exit 1
+mkdir -p outputs
+
+echo "Graph Construction started on $(hostname) at $(date)"
+
+# ────────────────────────────────────────────────
+# Execution
+# ────────────────────────────────────────────────
+# We use 12 cores to remain under the "per-node" saturation limit
+python src/analysis/build_graph.py \
+    --input "$INPUT_FILE" \
+    --output "$OUTPUT_FILE"
+
+echo "Graph Construction finished at $(date)"
+

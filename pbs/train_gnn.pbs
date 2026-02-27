@@ -1,0 +1,18 @@
+#!/bin/bash
+#PBS -q parallel
+#PBS -N gnn_solver_81k
+#PBS -l select=1:ncpus=16:mem=64gb
+#PBS -l walltime=04:00:00
+#PBS -j oe
+#PBS -o /home/svu/e1430653/job_logs/gnn_train.out
+
+export PATH="$HOME/miniconda3/bin:$PATH"
+source activate myenv
+
+# Atlas8 Optimization
+export OMP_NUM_THREADS=16
+
+cd /hpctmp/e1430653/project || exit 1
+
+python src/models/train_gnn.py
+

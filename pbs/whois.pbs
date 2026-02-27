@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS -q serial
+#PBS -N whois_final_3k
+#PBS -l select=1:ncpus=1:mem=4gb
+#PBS -l walltime=05:00:00
+#PBS -j oe
+#PBS -o /home/svu/e1430653/job_logs/whois_final.out
+
+# 1. Setup Environment
+export PATH="$HOME/miniconda3/bin:$PATH"
+source activate myenv
+
+# 2. Run the script
+cd /home/svu/e1430653 || exit 1
+python whois_lookup.py --input "suspicious_network99_domains.txt" --output "suspicious_network99_whois.csv"
+
