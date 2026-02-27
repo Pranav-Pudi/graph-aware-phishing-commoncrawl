@@ -4,7 +4,7 @@
 #PBS -l select=1:ncpus=24:mem=64gb
 #PBS -l walltime=04:00:00
 #PBS -j oe
-#PBS -o /home/svu/e1430653/job_logs/bert_para.out
+#PBS -o /path/to/job_logs/bert_para.out
 
 # Setup Env
 export PATH="$HOME/miniconda3/bin:$PATH"
@@ -17,7 +17,7 @@ cd /hpctmp/e1430653/project || exit 1
 mkdir -p outputs
 
 python src/analysis/bertopic_run.py \
-    --input "/hpctmp/e1430653/processed_features.parquet" \
+    --input "/path/to/processed_features.parquet" \
     --output "outputs/semantic_results.parquet" \
     --model-dir "outputs/bertopic_model"
 

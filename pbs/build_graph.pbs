@@ -4,7 +4,7 @@
 #PBS -l select=1:ncpus=12:mem=64gb
 #PBS -l walltime=08:00:00
 #PBS -j oe
-#PBS -o /home/svu/e1430653/job_logs/graph_build.out
+#PBS -o /path/to/job_logs/graph_build.out
 
 # ────────────────────────────────────────────────
 # Environment Setup
@@ -15,7 +15,7 @@ source activate myenv
 # ────────────────────────────────────────────────
 # Project Paths
 # ────────────────────────────────────────────────
-PROJ_DIR="/hpctmp/e1430653/project"
+PROJ_DIR="/path/to/project"
 INPUT_FILE="$PROJ_DIR/outputs/final_gnn_features.parquet"
 OUTPUT_FILE="$PROJ_DIR/outputs/graph_edges.parquet"
 

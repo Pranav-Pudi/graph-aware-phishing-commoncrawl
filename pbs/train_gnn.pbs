@@ -4,7 +4,7 @@
 #PBS -l select=1:ncpus=16:mem=64gb
 #PBS -l walltime=04:00:00
 #PBS -j oe
-#PBS -o /home/svu/e1430653/job_logs/gnn_train.out
+#PBS -o /path/to/job_logs/gnn_train.out
 
 export PATH="$HOME/miniconda3/bin:$PATH"
 source activate myenv

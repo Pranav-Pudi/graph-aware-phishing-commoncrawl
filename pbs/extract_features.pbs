@@ -4,10 +4,10 @@
 #PBS -l select=1:ncpus=24:mem=32gb
 #PBS -l walltime=24:00:00
 #PBS -j oe
-#PBS -o /home/svu/e1430653/job_logs/extract.out
+#PBS -o /path/to/job_logs/extract.out
 
 # Ensure the log directory exists
-mkdir -p /home/svu/e1430653/job_logs
+mkdir -p /path/to/job_logs
 
 # Environment setup - Use YOUR local miniconda
 source $HOME/miniconda3/etc/profile.d/conda.sh
@@ -22,9 +22,9 @@ echo "Python path: $(which python)"
 # Run extraction using the relative path inside your project folder
 # Make sure src/features/extract.py exists in /hpctmp/e1430653/project/
 python src/features/extract.py \
-    --vn-dir    /hpctmp/e1430653/raw_data/vi_html \
-    --non-vn-dir /hpctmp/e1430653/raw_data/html_mc4_current \
-    --output    /hpctmp/e1430653/processed_features.parquet \
+    --vn-dir    /path/to/raw_data/vi_html \
+    --non-vn-dir /path/to/raw_data/html_mc4_current \
+    --output    /path/to/processed_features.parquet \
     --nproc     24
 
 echo "Job finished at $(date)"
